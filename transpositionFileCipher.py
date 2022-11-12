@@ -1,5 +1,5 @@
 # Transposition Cipher Encrypt/Decrypt File
-# https://www.nostarch.com/crackingcodes (BSD Licensed)
+#
 
 import time
 import os
@@ -59,4 +59,3 @@ def main():
 # call the main() function.
 if __name__ == '__main__':
     main()
-
