@@ -1,6 +1,7 @@
 # # Public Key Cipher
 #
-import sys, math
+import sys
+import math
 
 # The public and private keys for this program are created by
 # the makePublicPrivateKeys.py program.
@@ -8,17 +9,19 @@ import sys, math
 
 SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.'
 
+
 def main():
     # Runs a test that encrypts a message to a file or decrypts a message
     # from a file.
-    filename = 'encrypted_file.txt' # The file to write to/read from.
-    mode = 'encrypt' # Set to either 'encrypt' or 'decrypt'.
+    filename = 'encrypted_file.txt'  # The file to write to/read from.
+    mode = 'encrypt'  # Set to either 'encrypt' or 'decrypt'.
 
     if mode == 'encrypt':
         message = 'Journalists belong in the gutter because that is where the ruling classes throw their guilty secrets. Gerald Priestland. The Founding Fathers gave the free press the protection it must have to bare the secrets of government and inform the people. Hugo Black.'
         pubKeyFilename = 'al_sweigart_pubkey.txt'
         print('Encrypting and writing to %s...' % (filename))
-        encryptedText = encryptAndWriteToFile(filename, pubKeyFilename, message)
+        encryptedText = encryptAndWriteToFile(
+            filename, pubKeyFilename, message)
 
         print('Encrypted text:')
         print(encryptedText)
@@ -36,14 +39,16 @@ def getBlocksFromText(message, blockSize):
     # Converts a string message to a list of block integers.
     for character in message:
         if character not in SYMBOLS:
-            print('ERROR: The symbol set does not have the character %s' % (character))
+            print('ERROR: The symbol set does not have the character %s' %
+                  (character))
             sys.exit()
     blockInts = []
     for blockStart in range(0, len(message), blockSize):
         # Calculate the block integer for this block of text:
         blockInt = 0
         for i in range(blockStart, min(blockStart + blockSize, len(message))):
-            blockInt += (SYMBOLS.index(message[i])) * (len(SYMBOLS) ** (i % blockSize))
+            blockInt += (SYMBOLS.index(message[i])) * \
+                (len(SYMBOLS) ** (i % blockSize))
         blockInts.append(blockInt)
     return blockInts
 
@@ -131,7 +136,6 @@ def readFromFileAndDecrypt(messageFilename, keyFilename):
     # Using a key from a key file, read an encrypted message from a file
     # and then decrypt it. Returns the decrypted message string.
     keySize, n, d = readKeyFile(keyFilename)
-
 
     # Read in the message length and the encrypted message from the file:
     fo = open(messageFilename)
