@@ -22,7 +22,7 @@ def main():
         print('Encrypting and writing to %s...' % (filename))
         encryptedText = encryptAndWriteToFile(
             filename, pubKeyFilename, message)
-
+        #
         print('Encrypted text:')
         print(encryptedText)
 
